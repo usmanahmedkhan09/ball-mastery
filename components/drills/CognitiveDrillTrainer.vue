@@ -1,29 +1,71 @@
 <template>
-  <div class="card bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200">
-    <h2 class="text-2xl font-bold text-indigo-900 mb-4 text-center">🧠 Interactive Training Mode</h2>
+  <!-- Mobile: Full-screen overlay, Desktop: Card -->
+  <div 
+    :class="[
+      trainingStatus !== 'idle' && isMobile 
+        ? 'fixed inset-0 z-50 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 flex items-center justify-center p-4 overflow-y-auto' 
+        : 'card bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200'
+    ]"
+  >
+    <!-- Close button for mobile full-screen mode -->
+    <button
+      v-if="trainingStatus !== 'idle' && isMobile"
+      @click="stopTraining"
+      class="absolute top-4 right-4 z-10 p-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full text-white transition-all"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Content wrapper -->
+    <div :class="trainingStatus !== 'idle' && isMobile ? 'w-full max-w-md' : 'w-full'">
+      <h2 
+        :class="[
+          'text-2xl font-bold mb-4 text-center',
+          trainingStatus !== 'idle' && isMobile ? 'text-white' : 'text-indigo-900'
+        ]"
+      >
+        🧠 Interactive Training Mode
+      </h2>
 
     <!-- Training Status Display -->
     <div v-if="trainingStatus !== 'idle'" class="mb-6">
       <!-- Countdown Display -->
       <div v-if="trainingStatus === 'countdown'" class="text-center">
-        <div class="text-8xl font-bold text-primary-600 mb-4 animate-pulse">
+        <div 
+          :class="[
+            'text-8xl font-bold mb-4 animate-pulse',
+            isMobile ? 'text-white' : 'text-primary-600'
+          ]"
+        >
           {{ countdownValue }}
         </div>
-        <p class="text-xl text-gray-600">Get Ready!</p>
+        <p :class="['text-xl', isMobile ? 'text-white' : 'text-gray-600']">Get Ready!</p>
       </div>
 
       <!-- Active Training Display -->
       <div v-else-if="trainingStatus === 'active'" class="text-center">
         <div class="mb-6">
-          <div class="text-lg font-semibold text-gray-700 mb-2">
+          <div 
+            :class="[
+              'text-lg font-semibold mb-2',
+              isMobile ? 'text-white' : 'text-gray-700'
+            ]"
+          >
             Set {{ currentSet }} of {{ totalSets }}
           </div>
-          <div class="text-6xl font-bold text-green-600 mb-4">
+          <div 
+            :class="[
+              'text-6xl font-bold mb-4',
+              isMobile ? 'text-white' : 'text-green-600'
+            ]"
+          >
             {{ timeRemaining }}s
           </div>
-          <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-            <div 
-              class="bg-green-600 h-4 transition-all duration-1000 ease-linear"
+          <div :class="['w-full rounded-full h-4 overflow-hidden', isMobile ? 'bg-white/20' : 'bg-gray-200']">
+            <div
+              :class="['h-4 transition-all duration-1000 ease-linear', isMobile ? 'bg-white' : 'bg-green-600']"
               :style="{ width: `${(timeRemaining / setDuration) * 100}%` }"
             ></div>
           </div>
@@ -61,20 +103,42 @@
 
       <!-- Rest Period Display -->
       <div v-else-if="trainingStatus === 'rest'" class="text-center">
-        <div class="text-lg font-semibold text-gray-700 mb-2">Rest Period</div>
-        <div class="text-6xl font-bold text-yellow-600 mb-4">
+        <div 
+          :class="[
+            'text-lg font-semibold mb-2',
+            isMobile ? 'text-white' : 'text-gray-700'
+          ]"
+        >
+          Rest Period
+        </div>
+        <div 
+          :class="[
+            'text-6xl font-bold mb-4',
+            isMobile ? 'text-white' : 'text-yellow-600'
+          ]"
+        >
           {{ timeRemaining }}s
         </div>
-        <p class="text-xl text-gray-600">Next set starting soon...</p>
+        <p :class="['text-xl', isMobile ? 'text-white' : 'text-gray-600']">Next set starting soon...</p>
       </div>
 
       <!-- Completed Display -->
       <div v-else-if="trainingStatus === 'completed'" class="text-center">
         <div class="text-6xl mb-4">🎉</div>
-        <div class="text-3xl font-bold text-green-600 mb-2">
+        <div 
+          :class="[
+            'text-3xl font-bold mb-2',
+            isMobile ? 'text-white' : 'text-green-600'
+          ]"
+        >
           Training Complete!
         </div>
-        <p class="text-xl text-gray-600 mb-6">
+        <p 
+          :class="[
+            'text-xl mb-6',
+            isMobile ? 'text-white' : 'text-gray-600'
+          ]"
+        >
           Great job! You completed all {{ totalSets }} sets.
         </p>
       </div>
@@ -84,13 +148,19 @@
         <button
           v-if="trainingStatus === 'active' || trainingStatus === 'rest'"
           @click="pauseTraining"
-          class="btn-secondary"
+          :class="[
+            'px-6 py-3 rounded-lg font-semibold transition-colors',
+            isMobile ? 'bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm' : 'btn-secondary'
+          ]"
         >
           ⏸️ Pause
         </button>
         <button
           @click="stopTraining"
-          class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          :class="[
+            'px-6 py-3 rounded-lg font-semibold transition-colors',
+            isMobile ? 'bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm' : 'bg-red-500 hover:bg-red-600 text-white'
+          ]"
         >
           ⏹️ Stop Training
         </button>
@@ -216,6 +286,9 @@ const restDuration = 30; // seconds
 const countdownDuration = 3; // seconds
 const cueIntervalMs = 2000; // milliseconds between cues
 
+// Detect mobile device
+const isMobile = ref(false);
+
 // State
 const trainingStatus = ref<TrainingStatus>('idle');
 const currentSet = ref(0);
@@ -227,10 +300,25 @@ let trainingInterval: ReturnType<typeof setInterval> | null = null;
 let cueIntervalHandle: ReturnType<typeof setInterval> | null = null;
 let synth: SpeechSynthesis | null = null;
 
-// Initialize speech synthesis
+// Initialize speech synthesis and detect mobile
 onMounted(() => {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    synth = window.speechSynthesis;
+  if (typeof window !== 'undefined') {
+    if ('speechSynthesis' in window) {
+      synth = window.speechSynthesis;
+    }
+    // Detect mobile device
+    isMobile.value = window.innerWidth < 768;
+    
+    // Update on resize
+    const handleResize = () => {
+      isMobile.value = window.innerWidth < 768;
+    };
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    onUnmounted(() => {
+      window.removeEventListener('resize', handleResize);
+    });
   }
 });
 
