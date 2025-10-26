@@ -22,6 +22,7 @@ export interface DrillConfig
     equipment: string[]; // List of required equipment
     keyPoints: string[]; // Important coaching points
     progressions?: string[]; // Ways to make it harder
+    benefits?: string[]; // What players will gain from this drill
     completed?: boolean; // Track completion
 }
 

@@ -79,6 +79,13 @@ export const useDrillStore = defineStore('drill', {
                         'One-touch passing only',
                         'Add defensive pressure',
                     ],
+                    benefits: [
+                        'Improves passing accuracy and technique',
+                        'Develops communication skills with teammates',
+                        'Enhances spatial awareness and movement off the ball',
+                        'Builds first touch control under pressure',
+                        'Increases stamina through constant movement',
+                    ],
                 },
                 {
                     id: 'rondo-4v1',
@@ -325,6 +332,14 @@ export const useDrillStore = defineStore('drill', {
                         'Move cones further apart',
                         'Add more complex movements (burpee before touching)',
                         'Decrease rest time between sets',
+                    ],
+                    benefits: [
+                        'Sharpens reaction time and split-second decision making',
+                        'Improves auditory processing and cognitive flexibility',
+                        'Enhances explosive power and change of direction speed',
+                        'Builds mental focus and concentration under pressure',
+                        'Develops quick feet and athletic stance',
+                        'Trains dual-task processing (hearing + moving)',
                     ],
                 },
                 {

@@ -142,6 +142,17 @@
         </ul>
       </div>
 
+      <!-- Benefits -->
+      <div v-if="drill.benefits && drill.benefits.length > 0" class="card bg-green-50 border-2 border-green-200">
+        <h2 class="text-xl font-bold mb-4 text-green-900">🎯 What You'll Gain (Benefits)</h2>
+        <ul class="space-y-2">
+          <li v-for="(benefit, idx) in drill.benefits" :key="idx" class="flex items-start space-x-3">
+            <span class="text-green-600 font-bold text-xl">✓</span>
+            <span class="text-green-900">{{ benefit }}</span>
+          </li>
+        </ul>
+      </div>
+
       <!-- Progressions -->
       <div v-if="drill.progressions && drill.progressions.length > 0" class="card bg-purple-50 border-2 border-purple-200">
         <h2 class="text-xl font-bold mb-4 text-purple-900">📈 Make It Harder (Progressions)</h2>
