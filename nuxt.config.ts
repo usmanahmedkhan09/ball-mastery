@@ -36,22 +36,18 @@ export default defineNuxtConfig({
       display: 'standalone',
       orientation: 'portrait',
       start_url: '/',
+      scope: '/',
       icons: [
         {
-          src: '/favicon.ico',
-          sizes: '48x48',
-          type: 'image/x-icon'
-        },
-        {
-          src: '/favicon.ico',
+          src: 'https://cdn-icons-png.flaticon.com/512/53/53283.png',
           sizes: '192x192',
-          type: 'image/x-icon',
+          type: 'image/png',
           purpose: 'any'
         },
         {
-          src: '/favicon.ico',
+          src: 'https://cdn-icons-png.flaticon.com/512/53/53283.png',
           sizes: '512x512',
-          type: 'image/x-icon',
+          type: 'image/png',
           purpose: 'any maskable'
         }
       ]
