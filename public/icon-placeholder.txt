@@ -1,0 +1,38 @@
+# PWA Icon Placeholders Needed
+
+To get custom app icons when users install InstinctFC on their phones, you need to add these image files to the /public folder:
+
+## Required Files:
+1. pwa-192x192.png (192x192 pixels)
+2. pwa-512x512.png (512x512 pixels)
+
+## How to Create Them:
+
+### Option 1: Online Generator (Easiest)
+1. Go to: https://www.pwabuilder.com/imageGenerator
+2. Upload a soccer ball or InstinctFC logo image
+3. Download the generated icons
+4. Place them in the /public folder
+
+### Option 2: Design Your Own
+Create a simple icon with:
+- Soccer ball ⚽
+- Brain icon 🧠 (for cognitive training)
+- Green color theme (#10b981)
+- White or transparent background
+
+### Option 3: Use Figma/Canva
+1. Create 512x512px canvas
+2. Design your icon
+3. Export as PNG
+4. Resize to 192x192 for the smaller version
+
+## Current Status:
+The PWA will work and be installable on mobile, but will show default browser icon until you add these files.
+
+## Design Suggestions:
+- Soccer ball with brain icon overlay
+- Green gradient background
+- Bold "FC" or "⚽🧠" text
+- Keep it simple for small sizes
+
