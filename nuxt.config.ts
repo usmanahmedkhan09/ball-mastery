@@ -27,8 +27,6 @@ export default defineNuxtConfig({
 
   pwa: {
     registerType: 'autoUpdate',
-    // Icons will be auto-generated from favicon until custom icons are added
-    // To add custom icons: place pwa-192x192.png and pwa-512x512.png in /public folder
     manifest: {
       name: 'InstinctFC - Soccer Training',
       short_name: 'InstinctFC',
@@ -37,7 +35,26 @@ export default defineNuxtConfig({
       background_color: '#ffffff',
       display: 'standalone',
       orientation: 'portrait',
-      start_url: '/'
+      start_url: '/',
+      icons: [
+        {
+          src: '/favicon.ico',
+          sizes: '48x48',
+          type: 'image/x-icon'
+        },
+        {
+          src: '/favicon.ico',
+          sizes: '192x192',
+          type: 'image/x-icon',
+          purpose: 'any'
+        },
+        {
+          src: '/favicon.ico',
+          sizes: '512x512',
+          type: 'image/x-icon',
+          purpose: 'any maskable'
+        }
+      ]
     },
     workbox: {
       navigateFallback: '/',
