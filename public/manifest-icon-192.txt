@@ -1,0 +1,17 @@
+This is a placeholder file. To complete the PWA setup, you need to:
+
+1. Create a 192x192 PNG icon and save it as: public/pwa-192x192.png
+2. Create a 512x512 PNG icon and save it as: public/pwa-512x512.png
+
+Icon design suggestions:
+- Use a soccer ball (⚽) or brain (🧠) as the main element
+- Use the primary green color (#10b981)
+- Make sure the icons are clear and recognizable at small sizes
+- Consider using a tool like Figma, Canva, or an online icon generator
+
+For now, you can use a favicon generator service like:
+- https://realfavicongenerator.net/
+- https://favicon.io/
+
+Upload a simple logo or emoji and it will generate all required sizes.
+
