@@ -4,6 +4,8 @@ export type DrillDifficulty = 'beginner' | 'intermediate' | 'advanced' | 'pro';
 
 export type DrillSection = 'fitness' | 'intelligence' | 'agility' | 'soccer';
 
+export type CueType = 'colors' | 'arrows' | 'numbers' | 'audio';
+
 export interface DrillConfig
 {
     id: string;
@@ -23,6 +25,8 @@ export interface DrillConfig
     keyPoints: string[]; // Important coaching points
     progressions?: string[]; // Ways to make it harder
     benefits?: string[]; // What players will gain from this drill
+    cueType?: CueType[]; // Types of cues to display during training (colors, arrows, numbers, audio)
+    audioForCues?: CueType[]; // Which specific cue types should have audio (e.g., ['arrows'] means only arrows speak, not colors/numbers)
     completed?: boolean; // Track completion
 }
 

@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="flex items-center space-x-4 mb-8">
         <NuxtLink
-          to="/drills"
+          :to="backLink"
           class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,7 +172,7 @@
           
           <!-- Interactive Training Mode for Cognitive Drills -->
           <div v-if="drill.category === 'cognitive'">
-            <DrillsCognitiveDrillTrainer 
+            <DrillsDrillTrainer 
               :drill-id="drill.id"
               @completed="handleTrainingCompleted"
             />
@@ -236,8 +236,8 @@
                 >
                   ✓ Completed - Train Again?
                 </button>
-                <NuxtLink to="/drills" class="btn-secondary w-full text-center block">
-                  Back to All Drills
+                <NuxtLink :to="backLink" class="btn-secondary w-full text-center block">
+                  Back to Drills
                 </NuxtLink>
               </div>
             </div>
@@ -256,7 +256,7 @@
       <h2 class="text-2xl font-bold text-gray-900 mb-2">Drill Not Found</h2>
       <p class="text-gray-600 mb-8">The drill you're looking for doesn't exist.</p>
       <NuxtLink to="/drills" class="btn-primary">
-        Browse All Drills
+        Back to Drills
       </NuxtLink>
     </div>
   </div>
@@ -274,6 +274,14 @@ const drill = computed(() =>
 );
 
 const isCompleted = computed(() => drillStore.isCompleted(drillId.value));
+
+// Back link - navigate to section page if drill has a section, otherwise main drills page
+const backLink = computed(() => {
+  if (drill.value?.section) {
+    return `/drills/section/${drill.value.section}`;
+  }
+  return '/drills';
+});
 
 // Tab state
 const activeTab = ref<'details' | 'training'>('details');
